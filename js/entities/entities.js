@@ -52,9 +52,17 @@ game.PlayerEntity=me.Entity.extend({
         me.audio.play("jump");
     }
 }
+       if(me.input.isKeyPressed("attack")){
+           if(!this.renderable.isCurrentAnimation("attack")){  
+               //Sets "attack" animation then back to "idle"
+               this.renderable.setCurrentAnimation("attack", "idle");
+               //Next time the sequence is started we begin from the first animation,not wherever we left off
+               //when we switched animation
+               this.renderable.setAnimationFrame();
+           }
+       }
        
-       
-        if(this.body.vel.x !== 0){
+       else if(this.body.vel.x !== 0){
         if (!this.renderable.isCurrentAnimation("walk")) {
                 this.renderable.setCurrentAnimation("walk");
                 
@@ -62,21 +70,11 @@ game.PlayerEntity=me.Entity.extend({
     }else{
         this.renderable.setCurrentAnimation("idle");
     }
-        
-    if(me.input.isKeyPressed("attack")){
-           if(!this.renderable.isCurrentAnimation("attack")){
-     
-               //Sets "attack" animation then back to "idle"
-               this.renderable.setCurrentAnimation("attack", "idle");
-               //Next time the sequence is started we begin from the first animation,not wherever we left off
-               //when we switched animation
-               this.renderable.setAnimationFrame();
-           }
-       }    
+    
        
        this.body.update(delta);
        
-       this._super(me.Entity,"update", [delta])
+       this._super(me.Entity,"update", [delta]);
        
        return true;
    }
@@ -92,7 +90,7 @@ game.PlayerBaseEntity=me.Entity.extend({
                 spritewidth: "100",
                 spriteheight: "100",
                 getShape: function(){
-                    return(new me.Rect(0, 0, 100, 100)).toPolygon();
+                    return(new me.Rect(0, 0, 100, 65)).toPolygon();
                 }
             }]);
         this.broken = false;
@@ -133,7 +131,7 @@ game.EnemyBaseEntity=me.Entity.extend({
                 spritewidth: "100",
                 spriteheight: "100",
                 getShape: function(){
-                    return(new me.Rect(0, 0, 100, 100)).toPolygon();
+                    return(new me.Rect(0, 0, 100, 65)).toPolygon();
                 }
             }]);
         this.broken = false;
