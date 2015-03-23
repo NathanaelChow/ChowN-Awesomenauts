@@ -12,10 +12,11 @@ game.PlayerEntity=me.Entity.extend({
      }]);
      
      this.body.setVelocity(5,20);
+     this.facing = "right";
      me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
      
      this.renderable.addAnimation("idle", [78]);
-     this.renderable.addAnimation("walk", [117, 118, 119, 120, 121, 122, 123, 124, 125], 80);
+     this.renderable.addAnimation("walk", [117, 118, 119, 120, 121, 122, 123, 124, 125], 120);
      this.renderable.addAnimation("attack", [65, 66, 67, 68, 69, 70, 71, 72], 80);
      
      this.renderable.setCurrentAnimation("idle");
@@ -27,12 +28,14 @@ game.PlayerEntity=me.Entity.extend({
        
         if(me.input.isKeyPressed("right")){
            this.body.vel.x += this.body.accel.x * me.timer.tick;
+           this.facing = "right";
            this.flipX(true);
        }else{
            this.body.vel.x = 0;
        }
        
         if (me.input.isKeyPressed("left")) {
+            this.facing = "left";
             this.body.vel.x -= this.body.accel.x * me.timer.tick;
             this.flipX(false);
 
@@ -62,21 +65,47 @@ game.PlayerEntity=me.Entity.extend({
            }
        }
        
-       else if(this.body.vel.x !== 0){
+       else if(this.body.vel.x !== 0 && !this.renderable.isCurrentAnimation("attack")){
         if (!this.renderable.isCurrentAnimation("walk")) {
                 this.renderable.setCurrentAnimation("walk");
                 
         }   
-    }else{
+    }else if(!this.renderable.isCurrentAnimation("attack")){
         this.renderable.setCurrentAnimation("idle");
     }
     
-       
+       me.collision.check(this, true, this.collideHandler.bind(this), true);
        this.body.update(delta);
        
        this._super(me.Entity,"update", [delta]);
        
        return true;
+   },
+
+   collideHandler: function(response){
+       if(response.b.type==='EnemyBaseEntity'){
+           var ydif = this.pos.y - response.b.pos.y;
+           var xdif = this.pos.x - response.b.pos.x;
+           
+           console.log("xdif" + xdif + "ydif" + ydif);
+           
+           if(ydif<-32 && xdif< 70 && xdif>-35){
+               this.body.falling = false;
+               this.body.vel.y = -1;
+           } 
+           else if(xdif>-5 && this.facing==='right' && (xdif<0)){
+               this.body.vel.x = 0;
+               this.pos.x = this.pos.x-1;
+           }else if(xdif<85 && this.facing==='left' && (xdif>0)){
+               this.body.vel.x = 0;
+               this.pos.x = this.pos.x +1;
+           }
+           
+           if(this.renderable.isCurrentAnimation("attack")){
+               response.b.loseHealth();
+           }
+           
+       }
    }
     
 });
@@ -160,6 +189,8 @@ game.EnemyBaseEntity=me.Entity.extend({
     
     onCollision: function(){
         
-    }
+    },
+    
+    loseHealth:Health
     
 });
