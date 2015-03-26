@@ -10,7 +10,7 @@ game.PlayerEntity = me.Entity.extend({
                     return(new me.Rect(0, 0, 20, 45)).toPolygon();
                 }
             }]);
-
+        this.type = "PlayerEntity";
         this.body.setVelocity(5, 20);
         this.facing = "right";
         this.now = new Date().getTime();
@@ -84,6 +84,11 @@ game.PlayerEntity = me.Entity.extend({
 
         return true;
     },
+    
+    loseHealth: function(damage){
+      this.health = this.health - damage; 
+    },
+    
     collideHandler: function(response) {
         if (response.b.type === 'EnemyBaseEntity') {
             var ydif = this.pos.y - response.b.pos.y;
@@ -139,7 +144,7 @@ game.PlayerBaseEntity = me.Entity.extend({
     update: function(delta) {
         if (this.health <= 0) {
             this.broken = true;
-            tihs.renderable.setCurrentAnimation("broken");
+            this.renderable.setCurrentAnimation("broken");
         }
         this.body.update(delta);
 
@@ -236,7 +241,6 @@ game.EnemyCreep = me.Entity.extend({
     update: function(delta) {
         this.now = new Date().getTime();
         
-
         this.body.vel.x -= this.body.accel.x * me.timer.tick;
 
         me.collision.check(this, true, this.collideHandler.bind(this), true);
@@ -248,14 +252,30 @@ game.EnemyCreep = me.Entity.extend({
 
         return true;
     },
+
     
-    collideHandeler: function(response){
+    collideHandler: function(response){
         if(response.b.type==='PlayerBase'){
             this.attacking=true;
             this.lastAttacking=this.now;
             this.body.vel.x = 0;
             this.pos.x = this.pos.x + 1;
             if((this.now-this.lastHit >= 1000)){
+                this.lastHit = this.now;
+                response.b.loseHealth(1);
+            }
+        }else if(response.b.type==='PlayerEntity'){
+            var xdif = this.pos.x - response.b.pos.x;
+            
+            this.attacking=true;
+            this.lastAttacking=this.now;
+            
+            if(xdif>0){
+            this.pos.x = this.pos.x + 1;
+            this.body.vel.x = 0;
+
+        }
+            if((this.now-this.lastHit >= 1000) && xdif>0){
                 this.lastHit = this.now;
                 response.b.loseHealth(1);
             }
