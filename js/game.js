@@ -5,8 +5,20 @@ var game = {
 	// an object where to store game information
 	data : {
 		// score
-		score : 0
-	},
+		score : 0,
+                enemyBaseHealth: 10,
+                playerBaseHealth: 10,
+                enemyCreepHealth:2,
+                playerHealth: 20,
+                enemyCreepAttack: 1,
+                playerAttack: 1,
+                playerAttackTimer: 900,
+                enemyCreepAttackTimer: 900,
+                playerMoveSpeed: 5,
+                creepMoveSpeed: 5,
+                gameManager: "",
+                player: ""
+    },
 	
 	
 	// Run on page load.
