@@ -259,7 +259,7 @@ game.EnemyCreep = me.Entity.extend({
 
         this.now = new Date().getTime();
         //this sets the speed or velocity of the EnemyCreep
-        this.body.setVelocity(3, 20);
+        this.body.setVelocity(game.data.creepMoveSpeed, 10);
 
         this.type = "EnemyCreep";
         //Sets the animation of the EmenyCreep
@@ -331,7 +331,7 @@ game.GameManager = Object.extend({
         this.now = new Date().getTime();
 
         if(game.data.player.dead){
-            me.game.world.removeChild(this);
+            me.game.world.removeChild(game.data.player);
             me.state.current().resetPlayer(10, 0);
         }
 

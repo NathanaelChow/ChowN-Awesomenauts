@@ -9,15 +9,24 @@ var game = {
                 enemyBaseHealth: 10,
                 playerBaseHealth: 10,
                 enemyCreepHealth:2,
-                playerHealth: 20,
+                playerHealth: 50,
                 enemyCreepAttack: 1,
                 playerAttack: 1,
                 playerAttackTimer: 900,
                 enemyCreepAttackTimer: 900,
                 playerMoveSpeed: 5,
-                creepMoveSpeed: 5,
+                creepMoveSpeed: 1,
                 gameManager: "",
-                player: ""
+                player: "",
+                exp: 0,
+                gold: 0,
+                exp1: 0,
+                exp2: 0,
+                exp3: 0,
+                exp4: 0,
+                exp5: 0
+                
+        
     },
 	
 	
@@ -63,6 +72,6 @@ var game = {
 		me.state.set(me.state.PLAY, new game.PlayScreen());
 
 		// Start the game.
-		me.state.change(me.state.PLAY);
+		me.state.change(me.state.MENU);
 	}
 };
