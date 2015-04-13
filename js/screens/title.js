@@ -52,8 +52,12 @@ game.TitleScreen = me.ScreenObject.extend({
                         me.state.change(me.state.PLAY);
         }
     })));
+    
+    
+    
+        },
 	
-	
+	 
 	/**	
 	 *  action to perform when leaving this screen (state change)
 	 */
