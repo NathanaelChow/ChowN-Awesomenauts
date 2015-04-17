@@ -10,13 +10,13 @@ game.PlayerEntity = me.Entity.extend({
         me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
 
         this.addAnimation();
-
+//this adds an animation
         
 
         this.renderable.setCurrentAnimation("idle");
        
     },
-
+//Tells the size of the animation frames
             setSuper: function(x, y, settings) {
         this._super(me.Entity, 'init', [x, y, {
                 image: "player",
@@ -29,13 +29,13 @@ game.PlayerEntity = me.Entity.extend({
                 }
             }]);
     },
-    
+    //Sets the attack and hit timer for the player
             setPlayerTimers: function() {
         this.now = new Date().getTime();
-        this.lastHit = this.now;
-        this.lastAttack = new Date().getTime();
+        this.lastHit = this.now;//Hit timer
+        this.lastAttack = new Date().getTime();//Attack timer
    },
-   
+   //Sets the health, movespeed and attack of the player
             setAttributes: function() {
         this.health = game.data.playerHealth;
         this.body.setVelocity(game.data.playerMoveSpeed, 20);
@@ -47,18 +47,18 @@ game.PlayerEntity = me.Entity.extend({
         this.dead = false;
         this.attacking = false;
     },
-    
+    //Sets the animation for idle, walk, and attack
             addAnimation: function() {
         this.renderable.addAnimation("idle", [78]);
         this.renderable.addAnimation("walk", [117, 118, 119, 120, 121, 122, 123, 124, 125], 120);
         this.renderable.addAnimation("attack", [65, 66, 67, 68, 69, 70, 71, 72], 80);
     },
-    
+    //This sets the player to lose health from its initial hp
             loseHealth: function(damage) {
         this.health = this.health - damage;
         console.log(this.health);
     },
-    
+    //Sets all the update to the player entity
             update: function(delta) {
         this.now = new Date().getTime();
         this.dead = this.checkIfDead();
@@ -69,14 +69,14 @@ game.PlayerEntity = me.Entity.extend({
         this._super(me.Entity, "update", [delta]);
         return true;
     },
-    
+    //Checks if the player entity is dead(hp is 0)
             checkIfDead: function(){
       if (this.health <= 0) {
            return true;
         }  
         return false;
     },
-    
+    //CHecks if the player is going right, left, and up
             checkKeyPressesAndMove: function() {
         if (me.input.isKeyPressed("right")) {
             this.moveRight();
@@ -97,13 +97,13 @@ game.PlayerEntity = me.Entity.extend({
         
         this.attacking = me.input.isKeyPressed("attack")
     },
-    
+    //sets the moving right
             moveRight: function(){
             this.body.vel.x += this.body.accel.x * me.timer.tick;
             this.facing = "right";
             this.flipX(true);
     },
-    
+    //sets the moving left
             moveLeft: function(){
             this.facing = "left";
             this.body.vel.x -= this.body.accel.x * me.timer.tick;
@@ -136,7 +136,7 @@ game.PlayerEntity = me.Entity.extend({
             this.renderable.setCurrentAnimation("idle");
         }  
     },
-    
+    //Sets the collision to the enemy creeps and base
             collideHandler: function(response) {
                 if (response.b.type === 'EnemyBaseEntity') {
                     this.collideWithEnemyBase(response);

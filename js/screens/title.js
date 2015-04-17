@@ -7,12 +7,16 @@ game.TitleScreen = me.ScreenObject.extend({
                 
                 me.game.world.addChild(new(me.Renderable.extend({
                     init: function(){
+                        //Sets the x and y cordinates of the text
                         this._super(me.Renderable, 'init', [270, 240, 300, 50]);
+                        //Sets the font and color
                         this.font = new me.Font("Arial", 46, "white");
+                        //Sets the clicking feature of the title
                         me.input.registerPointerEvent('pointerdown', this, this.newGame.bind(this), true);
                     },
                     
                     draw: function(renderer){
+                        //draws the text
                         this.font.draw(renderer.getContext(), "START A NEW GAME", this.pos.x, this.pos.y);
                     },
                     
@@ -27,6 +31,7 @@ game.TitleScreen = me.ScreenObject.extend({
                         me.save.remove('exp2');
                         me.save.remove('exp3');
                         me.save.remove('exp4');
+                        me.save.add({exp: 0, exp1: 0, exp2: 0, exp3: 0, exp4: 0});
                         me.state.change(me.state.PLAY);
                         
                     }
@@ -34,12 +39,16 @@ game.TitleScreen = me.ScreenObject.extend({
                 
                 me.game.world.addChild(new(me.Renderable.extend({
                     init: function(){
+                        //Sets the cordinates oof where the text shows up on the screen
                         this._super(me.Renderable, 'init', [380, 340, 250, 50]);
+                        //Sets the font, color, andd size
                         this.font = new me.Font("Arial", 46, "white");
+                        //Sets the clicking feature to the text
                         me.input.registerPointerEvent('pointerdown', this, this.newGame.bind(this), true);
                     },
                     
                     draw: function(renderer){
+                        //Draws the text
                         this.font.draw(renderer.getContext(), "CONTINUE", this.pos.x, this.pos.y);
                     },
                     
@@ -48,8 +57,15 @@ game.TitleScreen = me.ScreenObject.extend({
                     },
                     
                     newGame: function(){
+                        game.data.exp = me.save.exp;
+                        game.data.exp1 = me.save.exp1;
+                        game.data.exp2 = me.save.exp2;
+                        game.data.exp3 = me.save.exp3;
+                        game.data.exp4 = me.save.exp4;
+       
+                        
                         me.input.releasePointerEvent('pointerdown', this);
-                        me.state.change(me.state.PLAY);
+                        me.state.change(me.state.SPENDEXP);
         }
     })));
     

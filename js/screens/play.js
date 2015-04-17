@@ -7,7 +7,8 @@ game.PlayScreen = me.ScreenObject.extend({
 		game.data.score = 0;
                 
                 me.levelDirector.loadLevel("level01");
-                
+                console.log(game.data.exp);
+                console.log(game.data.exp2);
                 this.resetPlayer(0, 420);
                 
                 var gameTimerManager = me.pool.pull("GameTimerManager", 0, 0, {});
@@ -18,7 +19,7 @@ game.PlayScreen = me.ScreenObject.extend({
                 
                 var experienceManager = me.pool.pull("ExperienceManager", 0, 0, {});
                 me.game.world.addChild(experienceManager, 0);
-                
+                //Sets a key to run something if it is pressed
                 me.input.bindKey(me.input.KEY.D, "right");  
                 me.input.bindKey(me.input.KEY.A, "left"); 
                 me.input.bindKey(me.input.KEY.W, "jump");
