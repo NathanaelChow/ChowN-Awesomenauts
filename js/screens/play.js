@@ -19,8 +19,17 @@ game.PlayScreen = me.ScreenObject.extend({
                 
                 var experienceManager = me.pool.pull("ExperienceManager", 0, 0, {});
                 me.game.world.addChild(experienceManager, 0);
+                
+                var spendGold = me.pool.pull("SpendGold", 0, 0, {});
+                me.game.world.addChild(spendGold, 0);
+
                 //Sets a key to run something if it is pressed
-                me.input.bindKey(me.input.KEY.D, "right");  
+                me.input.bindKey(me.input.KEY.B, "buy");
+                me.input.bindKey(me.input.KEY.E, "skill1"); 
+                me.input.bindKey(me.input.KEY.F, "skill2");
+                me.input.bindKey(me.input.KEY.C, "skill3");  
+                
+                me.input.bindKey(me.input.KEY.D, "right"); 
                 me.input.bindKey(me.input.KEY.A, "left"); 
                 me.input.bindKey(me.input.KEY.W, "jump");
                 me.input.bindKey(me.input.KEY.SPACE, "attack");
