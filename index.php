@@ -26,19 +26,19 @@
         <form id="input" method="post">
                     <div class="field">
                         <label for="username">Username</label>
-                        <input type="text" name="username" id="username" autocomplete="off">
+                        <input type='text' name='username' id='username' autocomplete="off">
                     </div>
                     
                     <div class="password">
                         <label for="password">Password</label>
-                        <input type="text" name="password" id="password">
+                        <input type='password' name='password' id='password'>
                     </div>
                     
                     <button type="button" id="register">Register</button>
                     <button type="button" id="load">Load</button>
                     <button type="button" id="mainmenu">Main Menu</button>
-                </form>
-        
+                </form>        
+
         <!-- melonJS Library -->
         <!-- build:js js/app.min.js -->
         <script type="text/javascript" src="lib/melonJS-1.1.0-min.js"></script>
@@ -52,6 +52,7 @@
 
         <script type="text/javascript" src="js/entities/entities.js"></script>
         <script type="text/javascript" src="js/entities/EnemyBaseEntity.js"></script>
+        <script type="text/javascript" src="js/entities/PlayerBaseEntity.js"></script>
         <script type="text/javascript" src="js/entities/EnemyCreep.js"></script>
         <script type="text/javascript" src="js/entities/HUD.js"></script>
         
@@ -96,11 +97,62 @@
         </script>
         
         <script>
-            /*
-                $("#mainmenu").bind("click", function(){
+            
+            $("#mainmenu").bind("click", function(){
                     me.state.change(me.state.MENU);
+            });
+            
+            $("#register").bind("click", function(){
+                    $.ajax({
+                       type: "POST",
+                       url: "php/controller/create-user.php",
+                       data: {
+                           username: $("#username").val(),
+                           password: $("#password").val()
+                       },
+                       dataType: "text"
+                    })
+                            .success(function(response) {
+                                if(response === "true") {
+                                    me.state.change(me.state.PLAY);
+                                }
+                                else {
+                                    alert(response);
+                                }
+                            })
+                            .fail(function(response) {
+                                alert("Fail");
+                            });
                 });
-            */
+                $("#load").bind("click", function(){
+                    $.ajax({
+                       type: "POST",
+                       url: "php/controller/login-user.php",
+                       data: {
+                           username: $("#username").val(),
+                           password: $("#password").val()
+                       },
+                       dataType: "text"
+                    })
+                            .success(function(response) {
+                                if(response === "Invalid username and password") {
+                                    console.log("Error");
+                                    alert(response);
+                                }
+                                else {
+                                    var data = jQuery.parseJSON(response);
+                                    game.data.exp = Number (data["exp"]);
+                                    game.data.exp1 = Number (data["exp1"]);
+                                    game.data.exp2 = Number (data["exp2"]);
+                                    game.data.exp3 = Number (data["exp3"]);
+                                    game.data.exp4 = Number (data["exp4"]);
+                                    me.state.change(me.state.SPENDEXP);
+                                }
+                            })
+                            .fail(function(response) {
+                                alert("Fail");
+                            });
+                      });
         </script>
     </body>
 </html>

@@ -11,7 +11,10 @@ game.SpendExp = me.ScreenObject.extend({
                 me.input.bindKey(me.input.KEY.F4, "F4");
                 me.input.bindKey(me.input.KEY.F5, "F5");
                 
-                var exp1cost = ((game.data.exp1 + 1) * 10);
+                var exp1cost = ((Number(game.data.exp1) + 1) * 10);
+                var exp2cost = ((Number(game.data.exp2) + 1) * 50);
+                var exp3cost = ((Number(game.data.exp3) + 1) * 20);
+                var exp4cost = ((Number(game.data.exp4) + 1) * 20);
                  
                 me.game.world.addChild(new(me.Renderable.extend({
                     init: function(){
@@ -26,9 +29,9 @@ game.SpendExp = me.ScreenObject.extend({
                         this.font.draw(renderer.getContext(), "Press F1-F4 to BUY,F5 to SKIP", this.pos.x, this.pos.y);
                         this.font.draw(renderer.getContext(), "CURRENT EXP: " + game.data.exp.toString(), this.pos.x + 720, this.pos.y + 540);               
                         this.font.draw(renderer.getContext(), "F1: Gold Rate!                                       Current Level: " + game.data.exp1.toString() + " Cost: " + exp1cost, this.pos.x, this.pos.y + 70);
-                        this.font.draw(renderer.getContext(), "F2: Free Gold At Start!                          Current Level: " + game.data.exp2.toString() + " Cost: " + ((game.data.exp2 + 1) * 50), this.pos.x, this.pos.y + 120);
-                        this.font.draw(renderer.getContext(), "F3: DAMAGE +1!                                  Current Level: " + game.data.exp3.toString() + " Cost: " + ((game.data.exp3 + 1) * 20), this.pos.x, this.pos.y + 170);
-                        this.font.draw(renderer.getContext(), "F4: HEALTH +1!                                    Current Level: " + game.data.exp4.toString() + " Cost: " + ((game.data.exp4 + 1) * 20), this.pos.x, this.pos.y + 220);
+                        this.font.draw(renderer.getContext(), "F2: Free Gold At Start!                          Current Level: " + game.data.exp2.toString() + " Cost: " + exp2cost, this.pos.x, this.pos.y + 120);
+                        this.font.draw(renderer.getContext(), "F3: DAMAGE +1!                                  Current Level: " + game.data.exp3.toString() + " Cost: " +  exp3cost, this.pos.x, this.pos.y + 170);
+                        this.font.draw(renderer.getContext(), "F4: HEALTH +1!                                    Current Level: " + game.data.exp4.toString() + " Cost: " + exp4cost, this.pos.x, this.pos.y + 220);
                     
                     }
                  

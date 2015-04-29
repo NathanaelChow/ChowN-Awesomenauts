@@ -42,7 +42,9 @@ game.NewProfile = me.ScreenObject.extend({
 	 *  action to perform when leaving this screen (state change)
 	 */
 	onDestroyEvent: function(){
-            document.getElementbyId("input").style.visibility = "hidden";
-            document.getElementbyId("register").style.visibility = "hidden";
-	}
+            
+            document.getElementById("input").style.visibility = "hidden";
+            document.getElementById("register").style.visibility = "hidden";
+
+        }
 });

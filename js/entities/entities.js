@@ -205,6 +205,8 @@ game.PlayerEntity = me.Entity.extend({
                             //adds gold per creep kill 
                             game.data.gold += 1;
                             console.log("Current gold: " + game.data.gold);
+                            game.data.exp += 1;
+                            console.log("Current exp: " + game.data.exp);
                         }
                         response.b.loseHealth(game.data.playerAttack);
             }
