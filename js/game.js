@@ -18,6 +18,7 @@ var game = {
                 creepMoveSpeed: 1,
                 gameTimerManager: "",
                 heroDeathManager:"",
+                spearTimer: 1,
                 player: "",
                 exp: 0,
                 gold: 0,
@@ -83,6 +84,8 @@ var game = {
                 me.pool.register("GameTimerManager", game.GameTimerManager);
                 me.pool.register("HeroDeathManager", game.HeroDeathManager);
                 me.pool.register("ExperienceManager", game.ExperienceManager);
+                me.pool.register("spear", game.SpearThrow);
+
 
             
 		me.state.set(me.state.MENU, new game.TitleScreen());
