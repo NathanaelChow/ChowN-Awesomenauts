@@ -29,19 +29,19 @@ game.SpendGold = Object.extend ({
         this.buying = true;
         me.state.pause(me.state.PLAY);
         game.data.pausePos = me.game.viewport.localToWorld(0, 0);
-        game.data.buyScreen = new me.Sprite(game.data.pausePos.x , game.data.pausePos.y, me.loader.getImage("gold-screen"));
-        game.data.buyScreen.updateWhenPaused = true;
-        game.data.buyScreen.setOpacity(0.8);
-        me.game.world.addChild(game.data.buyScreen, 34);
+        game.data.buyscreen = new me.Sprite(game.data.pausePos.x , game.data.pausePos.y, me.loader.getImage("gold-screen"));
+        game.data.buyscreen.updateWhenPaused = true;
+        game.data.buyscreen.setOpacity(0.8);
+        me.game.world.addChild(game.data.buyscreen, 34);
         game.data.player.body.setVelocity(0, 0);
      
         me.state.pause(me.state.PLAY);      
         me.input.bindKey(me.input.KEY.F1, "F1", true);
-        me.input.bindKey(me.input.KEY.F1, "F2", true);
-        me.input.bindKey(me.input.KEY.F1, "F3", true);
-        me.input.bindKey(me.input.KEY.F1, "F4", true);
-        me.input.bindKey(me.input.KEY.F1, "F5", true);
-        me.input.bindKey(me.input.KEY.F1, "F6", true);
+        me.input.bindKey(me.input.KEY.F2, "F2", true);
+        me.input.bindKey(me.input.KEY.F3, "F3", true);
+        me.input.bindKey(me.input.KEY.F4, "F4", true);
+        me.input.bindKey(me.input.KEY.F5, "F5", true);
+        me.input.bindKey(me.input.KEY.F6, "F6", true);
         
         this.setBuyText();
          
@@ -55,7 +55,7 @@ game.SpendGold = Object.extend ({
                 this.updateWhenPaused = true;
                 this.alwaysUpdate = true;
             },
-                    
+                     
             draw: function(renderer) {
                 this.font.draw(renderer.getContext(), "PRESS F1-F6 TO BUY, B TO EXIT.", this.pos.x, this.pos.y);
                 this.font.draw(renderer.getContext(), "F1 Skill 1: DAMAGE +1!                      Current Level: " + game.data.skill1 + "  Cost: " + ((game.data.skill1+1)*10), this.pos.x, this.pos.y + 70);
@@ -75,15 +75,15 @@ game.SpendGold = Object.extend ({
         stopBuying: function() {
         this.buying = false;
         me.state.resume(me.state.PLAY);
-        me.game.world.removeChild(game.data.buyScreen);
+        me.game.world.removeChild(game.data.buyscreen);
         game.data.player.body.setVelocity(game.data.playerMoveSpeed, 20);
         
         me.input.unbindKey(me.input.KEY.F1, "F1", true);
-        me.input.unbindKey(me.input.KEY.F1, "F2", true);
-        me.input.unbindKey(me.input.KEY.F1, "F3", true);
-        me.input.unbindKey(me.input.KEY.F1, "F4", true);
-        me.input.unbindKey(me.input.KEY.F1, "F5", true);
-        me.input.unbindKey(me.input.KEY.F1, "F6", true);
+        me.input.unbindKey(me.input.KEY.F2, "F2", true);
+        me.input.unbindKey(me.input.KEY.F3, "F3", true);
+        me.input.unbindKey(me.input.KEY.F4, "F4", true);
+        me.input.unbindKey(me.input.KEY.F5, "F5", true);
+        me.input.unbindKey(me.input.KEY.F6, "F6", true);
         me.game.world.removeChild(game.data.buytext);
         
     },
@@ -124,22 +124,26 @@ game.SpendGold = Object.extend ({
         },
         
         checkCost: function(skill){
-           
+         //if skill level is 1 and gold is greater or equal to then add 1 level to the skill  
         if(skill === 1 && (game.data.gold >= ((game.data.skill1 + 1) * 10))) {
             return true;
         }
+        //if skill level is 2 and gold is greater or equal to then add 1 level to the skill
         else if(skill === 2 && (game.data.gold >= ((game.data.skill2 + 1) * 10))) {
             return true;
-        }
+        }//if skill level is 3 and gold is greater or equal to then add 1 level to the skill
         else if(skill === 3 && (game.data.gold >= ((game.data.skill3 + 1) * 10))) {
             return true;
         }
+        //if ability level is 4 and gold is greater or equal to then add 1 level to the ability
         else if(skill === 4 && (game.data.gold >= ((game.data.ability1 + 1) * 20))) {
             return true;
         }
+        //if ability level is 5 and gold is greater or equal to then add 1 level to the ability
         else if(skill === 5 && (game.data.gold >= ((game.data.ability2 + 1) * 20))) {
             return true;
         }
+        //if ability level is 6 and gold is greater or equal to then add 1 level to the ability
         else if(skill === 6 && (game.data.gold >= ((game.data.ability3 + 1) * 30))) {
             return true;
         }
@@ -165,15 +169,15 @@ game.SpendGold = Object.extend ({
             game.data.player.health += 1;
         }
         else if(skill === 4) {
-            game.data.gold -= (game.data.ability1 + 1) * 10;
+            game.data.gold -= (game.data.ability1 + 1) * 20;
             game.data.ability1 += 1;
         }
         else if(skill === 5) {
-            game.data.gold -= (game.data.ability2 + 1) * 10;
+            game.data.gold -= (game.data.ability2 + 1) * 20;
             game.data.ability2 += 1;
         }
         else if(skill === 6) {
-            game.data.gold -= (game.data.ability3 + 1) * 10;
+            game.data.gold -= (game.data.ability3 + 1) * 30;
             game.data.ability3 += 1;
         }
          

@@ -3,10 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/xampp/htdocs/ChowN-Awesomenauts/js/gamemanagers/SpendGold.js</file>
             <file>file:/C:/xampp/htdocs/ChowN-Awesomenauts/index.php</file>
-            <file>file:/C:/xampp/htdocs/ChowN-Awesomenauts/php/controller/create-user.php</file>
-            <file>file:/C:/xampp/htdocs/ChowN-Awesomenauts/php/controller/create-db.php</file>
+            <file>file:/C:/xampp/htdocs/ChowN-Awesomenauts/js/entities/MiniPlayerLocation.js</file>
+            <file>file:/C:/xampp/htdocs/ChowN-Awesomenauts/js/entities/entities.js</file>
+            <file>file:/C:/xampp/htdocs/ChowN-Awesomenauts/js/game.js</file>
+            <file>file:/C:/xampp/htdocs/ChowN-Awesomenauts/js/entities/MiniMap.js</file>
             <file>file:/C:/xampp/htdocs/ChowN-Awesomenauts/js/screens/play.js</file>
+            <file>file:/C:/xampp/htdocs/ChowN-Awesomenauts/js/gamemanagers/HeroDeathManager.js</file>
         </group>
     </open-files>
 </project-private>
