@@ -6,9 +6,12 @@ game.HeroDeathManager = Object.extend({
     update: function(){
         //Respawns the player
         if(game.data.player.dead){
-            me.game.world.removeChild(game.data.player);//removes the entity
+            //removes the entity player
+            me.game.world.removeChild(game.data.player);
+            //removes the miniPlayer entity
             me.game.world.removeChild(game.data.miniPlayer);
-            me.state.current().resetPlayer(10, 0);//Resets the character
+            //Resets the character
+            me.state.current().resetPlayer(10, 0);
         }
         return true;
     }

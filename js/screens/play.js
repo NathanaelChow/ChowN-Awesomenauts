@@ -28,7 +28,7 @@ game.PlayScreen = me.ScreenObject.extend({
 
                 //Sets a key to run something if it is pressed
                 me.input.bindKey(me.input.KEY.B, "buy");
-             // me.input.bindKey(me.input.KEY.M, "map");
+                me.input.bindKey(me.input.KEY.M, "map");
                 me.input.bindKey(me.input.KEY.E, "ability1"); 
                 me.input.bindKey(me.input.KEY.F, "ability2");
                 me.input.bindKey(me.input.KEY.C, "ability3");  

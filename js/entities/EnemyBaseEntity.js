@@ -14,17 +14,20 @@ game.EnemyBaseEntity = me.Entity.extend({
         this.health = game.data.enemyBaseHealth;
         this.alwaysUpdate = true;
         this.body.onCollision = this.onCollision.bind(this);
-
+        //Sets the type
         this.type = "EnemyBaseEntity";
-
+        //lists the type of animation
         this.renderable.addAnimation("idle", [0]);
         this.renderable.addAnimation("broken", [1]);
         this.renderable.setCurrentAnimation("idle");
 
     },
     update: function(delta) {
+        //if the health becomes zero or less
         if (this.health <= 0) {
+        //then broken is true
             this.broken = true;
+        //win is true
             game.data.win = true;
             this.renderable.setCurrentAnimation("broken");
         }

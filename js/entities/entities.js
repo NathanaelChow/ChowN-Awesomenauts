@@ -6,13 +6,13 @@ game.PlayerEntity = me.Entity.extend({
         this.setFlags();
 
         this.type = "PlayerEntity";
-
+        //Follows the player on the screen
         me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
 
         this.addAnimation();
 //this adds an animation
 
-
+        //sets animation to "idle"
         this.renderable.setCurrentAnimation("idle");
 
     },
@@ -161,6 +161,7 @@ game.PlayerEntity = me.Entity.extend({
             this.collideWithEnemyCreep(response);
         }
     },
+    //Checks the collision with the enemy base
     collideWithEnemyBase: function(response) {
         var ydif = this.pos.y - response.b.pos.y;
         var xdif = this.pos.x - response.b.pos.x;
@@ -174,6 +175,7 @@ game.PlayerEntity = me.Entity.extend({
         } else if (xdif < 85 && this.facing === 'left' && (xdif > 0)) {
             this.body.vel.x = 0;
         }
+        //Sets the animation to "attack"
         if (this.renderable.isCurrentAnimation("attack") && this.now - this.lastHit >= game.data.playerAttackTimer) {
             this.lastHit = this.now;
             response.b.loseHealth(game.data.playerAttack);
@@ -192,10 +194,12 @@ game.PlayerEntity = me.Entity.extend({
 
     },
     stopMovement: function(xdif) {
+        //Sets x velocity to 0 when left
         if (xdif > 0) {
             if (this.facing === "left") {
                 this.body.vel.x = 0;
             }
+        //Sets x velocity to 0 when right
         } else {
             if (this.facing === "right") {
                 this.body.vel.x = 0;
@@ -218,6 +222,7 @@ game.PlayerEntity = me.Entity.extend({
             //adds gold per creep kill 
             game.data.gold += 1;
             console.log("Current gold: " + game.data.gold);
+            //adds exp per creep kill
             game.data.exp += 1;
             console.log("Current exp: " + game.data.exp);
         }

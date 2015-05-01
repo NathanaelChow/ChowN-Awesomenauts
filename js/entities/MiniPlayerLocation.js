@@ -1,18 +1,20 @@
 game.MiniPlayerLocation = me.Entity.extend({
     init: function(x, y, settings) {
         this.settings = settings;
-        this.r = 5;
-        this.diameter = (this.r+2)*2;
+        this.r = 5;//Sets radius to 5
+        this.diameter = (this.r+2)*2;//Sets diameter to radius plus 2 then times 2
         this.anchorPoint = new me.Vector2d(0, 0);
         this.loc = x, y;
+        //Sets width equal to diameter
         this.settings.width = this.diameter;
+        //Sets height equal to the diameter
         this.settings.height = this.diameter;
         this.settings.spritewidth = this.diameter;
         this.settings = this.diameter;
         this.floating = true;
         this.image = me.video.createCanvas(this.settings.width, this.settings.height);
         var ctx = me.video.renderer.getContext2d(this.image);
-        
+        //colors in the mark
         ctx.fillStype = "rgba(0, 192, 32, 0.75)";
         ctx.strokeStyle = "blue";
         ctx.lineWidth = 2;
@@ -32,6 +34,8 @@ game.MiniPlayerLocation = me.Entity.extend({
             }
         }]);
     },
+    
+    //Draws the mini player 
     draw: function(renderer) {
         this._super(me.Entity, "draw", [renderer]);
         this.floating = true;

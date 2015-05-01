@@ -10,13 +10,14 @@ game.PlayerBaseEntity = me.Entity.extend({
                     return(new me.Rect(0, 0, 100, 65)).toPolygon();
                 }
             }]);
+        //bases is not broken
         this.broken = false;
         this.health = game.data.playerBaseHealth;
         this.alwaysUpdate = true;
         this.body.onCollision = this.onCollision.bind(this);
 
         this.type = "PlayerBase";
-
+        //renders animations
         this.renderable.addAnimation("idle", [0]);
         this.renderable.addAnimation("broken", [1]);
         this.renderable.setCurrentAnimation("idle");
@@ -33,6 +34,7 @@ game.PlayerBaseEntity = me.Entity.extend({
         return true;
     },
     loseHealth: function(damage) {
+        //Subtracts 1 health point based on the damage
         this.health = this.health - damage;
     },
     onCollision: function() {

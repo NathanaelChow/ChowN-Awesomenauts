@@ -3,7 +3,8 @@ game.resources = [
      * @example
      * {name: "example", type:"image", src: "data/img/example.png"},
      */
- 
+    
+    //Images
     {name: "background-tiles", type: "image", src: "data/img/background-tiles.png"},
     {name: "meta-tiles", type: "image", src: "data/img/meta-tiles.png"}, 
     {name: "player", type: "image", src: "data/img/orcSpear.png"},
@@ -11,12 +12,13 @@ game.resources = [
     {name: "creep1", type: "image", src: "data/img/brainmonster.png"},
     {name: "spear", type: "image", src: "data/img/spear.png"},
     
+    //Screens
     {name: "title-screen", type: "image", src: "data/img/title.png"},
     {name: "exp-screen", type: "image", src: "data/img/loadpic.png"},
     {name: "gold-screen", type: "image", src: "data/img/spend.png"},
     {name: "load-screen", type: "image", src: "data/img/loadpic.png"},
     {name: "new-screen", type: "image", src: "data/img/newpic.png"},
-    {name: "minimap", type: "image", src: "data/img/minimap1.png"},
+    {name: "minimap-img", type: "image", src: "data/img/minimap1.png"},
     /* Atlases 
      * @example
      * {name: "example_tps", type: "tps", src: "data/img/example_tps.json"},

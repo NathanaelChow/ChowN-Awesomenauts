@@ -26,11 +26,13 @@ game.TitleScreen = me.ScreenObject.extend({
                     },
                     
                     newGame: function(){
+                        //runs pointerdown when pointer is unclicked
                         me.input.releasePointerEvent('pointerdown', game.data.option1);
                         me.state.change(me.state.NEW);
                         
                     }
                 }));
+                //Adds option1
                 me.game.world.addChild(game.data.option1);
                 
                 
@@ -54,11 +56,13 @@ game.TitleScreen = me.ScreenObject.extend({
                     },
                     
                     newGame: function(){
+                        //runs pointerdown when the pointer is unclicked
                         me.input.releasePointerEvent('pointerdown', game.data.option2);
-                        me.state.change(me.state.NEW);
+                        me.state.change(me.state.LOAD);
         }
     }));
-                  me.game.world.addChild(game.data.option2);
+                //Adds option2  
+                me.game.world.addChild(game.data.option2);
     
        },
 		 

@@ -75,6 +75,8 @@ game.SpendExp = me.ScreenObject.extend({
 	 *  action to perform when leaving this screen (state change)
 	 */
 	onDestroyEvent: function(){
+            
+            //unbinds the keys
             me.input.unbindKey(me.input.KEY.F1, "F1");
             me.input.unbindKey(me.input.KEY.F2, "F2");
             me.input.unbindKey(me.input.KEY.F3, "F3");

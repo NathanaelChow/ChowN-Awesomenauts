@@ -7,7 +7,7 @@ game.NewProfile = me.ScreenObject.extend({
                 
                 document.getElementById("input").style.visibility = "visible";
                 document.getElementById("register").style.visibility = "visible";
-                
+                //unbinds all the keys
                 me.input.unbindKey(me.input.KEY.W);
                 me.input.unbindKey(me.input.KEY.A);
                 me.input.unbindKey(me.input.KEY.D);
@@ -15,6 +15,7 @@ game.NewProfile = me.ScreenObject.extend({
                 me.input.unbindKey(me.input.KEY.F);
                 me.input.unbindKey(me.input.KEY.C);
                 me.input.unbindKey(me.input.KEY.B);
+                me.input.unbindKey(me.input.KEY.M);
                 
                 var exp1cost = ((game.data.exp1 + 1) * 10);
                  

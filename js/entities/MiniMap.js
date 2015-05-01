@@ -1,7 +1,7 @@
 game.MiniMap = me.Entity.extend({
-    init: function(x, y, settings) {
+    init: function(x, y, settings){
         this._super(me.Entity, "init", [x, y, {
-                image: "minimap",
+                image: "minimap-img",
                 width: 521,
                 height: 174,
                 spritewidth: "521",
@@ -11,39 +11,40 @@ game.MiniMap = me.Entity.extend({
                 }
                 
         }]);
-    
+   
+   // Make sure minimap stays where it's suppose to be (follow screen coordinates)
         this.floating = true;
-        /*
-        this.now = new Date().getTime();
-        this.lastMap = new Date().getTime();
+
+        this.alwaysUpdate = true;
         this.mapping = true;
-        */
-    }
-  /*
+            
+    },
+    // Press M key to remove or display minimap
     update: function(){
-        this.now = new Date().getTime();
-        
-        if(me.input.isKeyPressed("map")) {
-            this.lastMap = this.now;
-            if(!this.mapping) {
-                this.mapOn();
+            
+        if(me.input.isKeyPressed("map")){
+            if(!this.mapping){
+                this.startMinimap();
+                    
+            }else {
+                this.stopMinimap();
             }
-            else {
-                this.mapOff();
-                this.mapping = false;
-            }
+                
+                
         }
         return true;
-        
     },
-    
-    mapOn: function() {
+    //Display the minimap
+    startMinimap: function() {
+        this.mapping = true;
         me.game.world.addChild(game.data.minimap, 30);
-        me.input.bindKey(me.input.KEY.M, "map", true);  
+        me.game.world.addChild(game.data.miniPlayer, 31);
     },
-    
-    mapOff: function() {
-        me.game.world.removeChild(game.data.minimap);  
+    //Remove the minimap    
+    stopMinimap: function() {
+        this.mapping = false;
+        me.game.world.removeChild(game.data.minimap);
+        me.game.world.removeChild(game.data.miniPlayer);
     }
-    */
+
 });
